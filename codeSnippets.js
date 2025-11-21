@@ -1,17 +1,14 @@
-  const options = {
-    method: "...",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({}),
-  };
+const options = {
+  method: "...",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({}),
+};
 
-
-  fetch(URL, option)
-  .then(result => result.fetch())
-  .then(data => console.log(data)
-  )
-
+fetch(URL, option)
+  .then((result) => result.json())
+  .then((data) => console.log(data));
 
 // ----------------------
 
