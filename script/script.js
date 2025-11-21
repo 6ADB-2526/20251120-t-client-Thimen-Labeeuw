@@ -4,6 +4,13 @@
 
 const selectKinderen = document.getElementById("kinderen");
 const lijst = document.getElementById("geschenkenlijst");
+const form = document.getElementById("addGeschenk");
+const SelectAddGeschenk = document.getElementById("geschenken");
+
+// var formDataGeschenkAdd = new FormData(form);
+// const geschenkAdd = Object.fromEntries(formDataGeschenkAdd);
+
+//console.log(geschenkAdd);
 
 function updateSelect() {
   fetch("https://o-apiandclient-render.onrender.com/kinderen").then(
@@ -25,32 +32,20 @@ selectKinderen.addEventListener("change", () => {
   fetch("https://o-apiandclient-render.onrender.com/kinderen")
     .then((result) => result.json())
     .then((kinderen) => {
-      let kindje = {};
-      kinderen.forEach((kind) => {
-        if (kind.id == selectKinderen.value) {
-          console.log(`${kind.id} en ${selectKinderen.value}`);
-
-          kindje = kind;
-        }
-      });
+      let kindje = kinderen.find(
+        (kind) => kind.id == selectKinderen.value
+      );
       console.log(kindje);
-      kindje.geschenkId.forEach((id) => {
-        const newLi = document.createElement("li");
-
-        fetch("https://o-apiandclient-render.onrender.com/gescheken")
-          .then((result) => {
-            result.json;
-          })
-          .then((geschenken) => {
-            const gechenkToShow = geschenken.find((geschenk) => {
-              geschenk.id == id;
-            });
-            newLi.innerHTML = id;
-            lijst.appendChild(newLi);
-          });
+      lijst.innerHTML = "";
+      kindje.fullGeschenk.forEach((geschenk) => {
+        const li = document.createElement("li");
+        li.innerHTML = geschenk.naam;
+        lijst.appendChild(li);
       });
     });
 });
+
+fetch("https://o-apiandclient-render.onrender.com/geschenken");
 
 updateSelect();
 
